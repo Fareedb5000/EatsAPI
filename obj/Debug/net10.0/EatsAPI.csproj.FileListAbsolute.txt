@@ -196,3 +196,4 @@ C:\Users\faree\AppData\Local\Temp\EatsApiBuild\EatsAPI.pdb
 C:\Users\faree\Documents\EatsAPI\bin\Debug\net10.0\Savorly\dist\metadata.json
 C:\Users\faree\Documents\EatsAPI\bin\Debug\net10.0\Npgsql.dll
 C:\Users\faree\Documents\EatsAPI\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\faree\Documents\EatsAPI\obj\Debug\net10.0\EatsAPI.sourcelink.json

@@ -1,14 +1,8 @@
----
-title: Savorly API
-sdk: docker
-app_port: 7860
----
-
 # Savorly API
 
-The API uses PostgreSQL through Npgsql. Hugging Face Spaces can host the API
-container, but the Supabase database and Storage bucket are managed separately.
-The container listens on port `7860`; Hugging Face terminates public HTTPS.
+The API uses PostgreSQL through Npgsql and can run as a Render Docker Web
+Service. Render terminates public HTTPS and supplies the service's `PORT`;
+the Docker entrypoint binds Kestrel to that port (default `10000`).
 
 ## Provision Supabase
 
@@ -79,18 +73,18 @@ dotnet ef migrations add DescribeYourChange
 dotnet ef database update
 ```
 
-Set the connection string in user-secrets for local development or in the
-Hugging Face Space's server-side **Settings → Variables and secrets**. Use
-Supabase's connection details and Npgsql format:
+Set the connection string in user-secrets for local development or in your
+Render Web Service's **Environment** settings. Use Supabase's connection
+details and Npgsql format:
 
 ```text
 Host=<supabase-host>;Port=5432;Database=postgres;Username=<database-user>;Password=<database-password>;SSL Mode=Require;Trust Server Certificate=true
 ```
 
-For Hugging Face, set `ConnectionStrings__DefaultConnection` to that value.
-Use Supabase's session pooler connection details if the direct database host
-isn't reachable from the Space. Never commit or paste the real connection
-string into source control or chat.
+Set `ConnectionStrings__DefaultConnection` to that value. Use Supabase's
+session pooler connection details if the direct database host isn't reachable
+from Render. Never commit or paste the real connection string into source
+control or chat.
 
 ## Menu image storage
 
@@ -100,7 +94,8 @@ a public `menu-images` bucket with a 5 MB limit and JPEG, PNG, and WebP types.
 Public access is for image downloads only; uploads are made by the API using a
 server-side service-role key.
 
-Configure these Hugging Face Space secrets:
+Configure these Render environment variables. Mark credential values as
+secrets:
 
 | Name | Required | Notes |
 | --- | --- | --- |

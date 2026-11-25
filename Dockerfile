@@ -11,8 +11,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-ENV ASPNETCORE_URLS=http://+:7860
-EXPOSE 7860
+ENV PORT=10000
+EXPOSE 10000
 USER $APP_UID
 
-ENTRYPOINT ["dotnet", "EatsAPI.dll"]
+ENTRYPOINT ["sh", "-c", "exec dotnet EatsAPI.dll --urls http://0.0.0.0:${PORT:-10000}"]
