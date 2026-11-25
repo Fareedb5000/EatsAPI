@@ -1,0 +1,13 @@
+.git
+.gitignore
+.vs
+.vscode
+bin
+obj
+Savorly
+**/node_modules
+**/.expo
+**/bin
+**/obj
+**/.env
+**/.env.*

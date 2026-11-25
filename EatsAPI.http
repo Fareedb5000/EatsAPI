@@ -1,0 +1,27 @@
+@EatsAPI_HostAddress = http://localhost:5225
+
+### Create an account
+POST {{EatsAPI_HostAddress}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "firstName": "Alex",
+  "lastName": "Johnson",
+  "userName": "alexj",
+  "email": "alex@example.com",
+  "password": "SavorlyPass123!"
+}
+
+### Sign in
+POST {{EatsAPI_HostAddress}}/api/auth/signin
+Content-Type: application/json
+
+{
+  "email": "alex@example.com",
+  "password": "SavorlyPass123!"
+}
+
+### Get current user (replace with the accessToken from sign-up or sign-in)
+GET {{EatsAPI_HostAddress}}/api/auth/me
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Accept: application/json

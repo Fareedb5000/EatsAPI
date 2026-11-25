@@ -1,0 +1,61 @@
+@baseUrl = http://localhost:5225
+@adminToken = replace-with-token-from-login
+@restaurantId = 1
+
+### Public list (active restaurants only)
+GET {{baseUrl}}/api/restaurants
+
+### Admin login
+POST {{baseUrl}}/api/admin/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "replace-with-the-configured-admin-password"
+}
+
+### Admin list (active and paused restaurants)
+GET {{baseUrl}}/api/restaurants/admin
+Authorization: Bearer {{adminToken}}
+
+### Admin get one restaurant
+GET {{baseUrl}}/api/restaurants/admin/{{restaurantId}}
+Authorization: Bearer {{adminToken}}
+
+### Create a restaurant
+POST {{baseUrl}}/api/restaurants/admin
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "Sample Bistro",
+  "cuisine": "Modern European",
+  "rating": 4.5,
+  "deliveryTime": "25-35 min",
+  "price": "$$",
+  "imageKey": "italian",
+  "isActive": true
+}
+
+### Update or pause a restaurant
+PUT {{baseUrl}}/api/restaurants/admin/{{restaurantId}}
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "The Italian Place",
+  "cuisine": "Italian • Pizza",
+  "rating": 4.6,
+  "deliveryTime": "30-40 min",
+  "price": "$$",
+  "imageKey": "italian",
+  "isActive": false
+}
+
+### Delete a restaurant
+DELETE {{baseUrl}}/api/restaurants/admin/{{restaurantId}}
+Authorization: Bearer {{adminToken}}
+
+### Not found example
+GET {{baseUrl}}/api/restaurants/admin/999999
+Authorization: Bearer {{adminToken}}

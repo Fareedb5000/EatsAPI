@@ -1,0 +1,30 @@
+@EatsAPI_HostAddress = http://localhost:5225
+@vendorUserName = new-vendor
+@vendorEmail = vendor@example.com
+@vendorPassword = replace-with-a-password
+
+### Register a store and its owner (created stores are immediately active)
+POST {{EatsAPI_HostAddress}}/api/vendor/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Taylor",
+  "lastName": "Owner",
+  "userName": "{{vendorUserName}}",
+  "email": "{{vendorEmail}}",
+  "password": "{{vendorPassword}}",
+  "storeName": "Taylor's Kitchen",
+  "cuisine": "Comfort food",
+  "deliveryTime": "25-35 min",
+  "price": "$$",
+  "imageKey": "italian"
+}
+
+### Sign in to the store created above
+POST {{EatsAPI_HostAddress}}/api/vendor/auth/signin
+Content-Type: application/json
+
+{
+  "userName": "{{vendorUserName}}",
+  "password": "{{vendorPassword}}"
+}
